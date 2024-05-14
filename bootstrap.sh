@@ -16,12 +16,11 @@ apt-get dist-upgrade -y
 apt-get install -y lsb-release apt-transport-https gnupg2 wget
 
 # add official Tor repository
-if ! grep -q "https://deb.torproject.org/torproject.org" /etc/apt/sources.list.d/tor.list; then
-    echo "== Adding the official Tor repository"
-    echo "deb [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org `lsb_release -cs` main" > /etc/apt/sources.list.d/tor.list
-    echo "deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org `lsb_release -cs` main" >> /etc/apt/sources.list.d/tor.list
-    wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
-fi
+
+echo "== Adding the official Tor repository"
+echo "deb [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org `lsb_release -cs` main" > /etc/apt/sources.list.d/tor.list
+echo "deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org `lsb_release -cs` main" >> /etc/apt/sources.list.d/tor.list
+wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
 apt-get update
 # install tor and related packages
 echo "== Installing Tor and related packages"
