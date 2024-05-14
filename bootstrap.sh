@@ -21,12 +21,11 @@ if ! grep -q "https://deb.torproject.org/torproject.org" /etc/apt/sources.list.d
     echo "deb [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org `lsb_release -cs` main" > /etc/apt/sources.list.d/tor.list
     echo "deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org `lsb_release -cs` main" >> /etc/apt/sources.list.d/tor.list
     wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
-    apt-get update
 fi
-
+apt-get update
 # install tor and related packages
 echo "== Installing Tor and related packages"
-apt-get install -y deb.torproject.org-keyring tor tor-arm tor-geoipdb
+apt-get install -y deb.torproject.org-keyring tor
 service tor stop
 
 # configure tor
@@ -89,7 +88,7 @@ service unattended-upgrades restart
 #else
 #	echo "== Could not configure sshd automatically.  You will need to do this manually."
 #fi
-systemctl restart tor@default
+
 # final instructions
 echo ""
 echo "  - Set Address, Nickname, Contact Info, and MyFamily for your Tor relay"
@@ -102,4 +101,4 @@ echo "== Consider having /etc/apt/sources.list update over HTTPS and/or HTTPS+To
 echo "   see https://guardianproject.info/2014/10/16/reducing-metadata-leakage-from-software-updates/"
 echo "   for more details"
 echo ""
-echo "== REBOOT THIS SERVER"
+echo "== run 'systemctl restart tor@default' to start your Tor relay"
