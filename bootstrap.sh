@@ -87,7 +87,8 @@ service unattended-upgrades restart
 #else
 #	echo "== Could not configure sshd automatically.  You will need to do this manually."
 #fi
-
+echo "Configuring firewall"
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 # final instructions
 echo ""
 echo "  - Set Address, Nickname, Contact Info, and MyFamily for your Tor relay"
