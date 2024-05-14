@@ -4,7 +4,7 @@
 ## Set your own contact info should be an email that will be published
 #ContactInfo 0xFFFFFFFF Random Person <nobody AT example dot com>
 
-ORPort 443
+ORPort 443 IPv4Only
 
 #RelayBandwidthRate 30 MBytes
 #RelayBandwidthBurst 100 MBytes
